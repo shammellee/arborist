@@ -1,28 +1,45 @@
-.PHONY: all clean
+.PHONY: all clean dev prod build.dir
 
 # CONFIG
 SHELL    := /bin/bash
 
 # DIRECTORIES
-SRC.DIR            := src
-BUILD.DIR          := build
-SUPPORT.DIR        := support
+SRC.DIR     := src
+BUILD.DIR   := build
+SUPPORT.DIR := support
+CPP.DIR     := $(SRC.DIR)/cpp
 
-CPP.DIR            := $(SRC.DIR)/cpp
+
+# FILES
+ARBORIST.SRC := arborist.cpp
+
+# PATHS
+ARBORIST.PATH := $(CPP.DIR)/$(ARBORIST.SRC)
 
 # COMMANDS
-CLEAN.CMD        = rm $(CLEAN.FLAGS)
-CLEAN.FLAGS     := -rf
+GPP.CMD       = $(CXX) $(G++.FLAGS) -o
+GPP.FLAGS    := 
 
-MKDIRS.CMD       = mkdir $(MKDIRS.FLAGS)
-MKDIRS.FLAGS    := -p
+ARBORIST.CMD := $(GPP.CMD) $(BUILD.DIR)/$(patsubst %.cpp,%,$(ARBORIST.SRC)) $(ARBORIST.PATH)
+             
+CLEAN.CMD     = rm $(CLEAN.FLAGS)
+CLEAN.FLAGS  := -rf
+             
+MKDIRS.CMD    = mkdir $(MKDIRS.FLAGS)
+MKDIRS.FLAGS := -p
 
 
-all: prune
+all: prod
 
-prune: $(CPP.DIR)/prune.cpp
+dev: $(ARBORIST.PATH)
 	@$(MKDIRS.CMD) $(BUILD.DIR)
-	$(CXX) -o $(BUILD.DIR)/$@ $<
+	watch -n 5 $(ARBORIST.CMD)
+
+prod: $(ARBORIST.PATH)
+	@echo -e '\033[33mBuilding Arborist...\033[0m'
+	@$(MKDIRS.CMD) $(BUILD.DIR)
+	@$(ARBORIST.CMD)
+	@echo -e '\033[32mBuild Complete!\033[0m'
 
 clean:
 	@echo -e '\033[33mCleaning Project...\033[0m'
