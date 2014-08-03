@@ -10,9 +10,14 @@ int main(int argc, char const *argv[])
 
 /*
 	TODO show help `chop -h,--help`
-	TODO show number of empty directories `chop -c,--count [<targetDirectory>]`
-	TODO show number of empty files `chop -f,--files-only -c,--count [<targetDirectory>]`
-	TODO remove empty directories `chop [<targetDirectory>]`
-	TODO remove empty (0 byte) files only `chop -f,--files-only [<targetDirectory>]`
-	TODO show number of removed directories/files
+	TODO show number of empty trees `chop -c,--count [<targetTree(s)>]`
+	TODO show number of empty files `chop -f,--files -c,--count [<targetTree(s)>]`
+	TODO show number of hidden files (starting with '.') `chop -i,--invisible-files -c,--count [<targetTree(s)>]`
+	TODO show number of symlinks `chop -s,--symlinks -c,--count [<targetTree(s)>]`
+	TODO remove empty trees `chop [<targetTree(s)>]`
+	TODO remove empty (0 byte) files `chop -f,--files [<targetTree(s)>]`
+	TODO remove symlinks `chop -s,--symlinks [<targetTree(s)>]`
+	TODO remove hidden files (starting with '.') `chop -i,--invisible-files [<targetTree(s)>]`
+	TODO show number of removed trees/files
+	TODO be verbose `chop -v [<targetTree(s)>]
 */
